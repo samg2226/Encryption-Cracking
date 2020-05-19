@@ -3,40 +3,40 @@ import copy
 
 def main():
 
-    org_dict = {'sam':'egg', 'kate':'cat', "mom": 'food', "dad": "golf", 'connor': 'tennis'}
-    word_list = ['egg', 'random', 'cat','tennis','this','argument', 'food', 'golf']
+    Original_Dictionary = {'sam':'egg', 'kate':'cat', "mom": 'food', "dad": "golf", 'connor': 'tennis'}
+    English_Words_To_Test = ['egg', 'random', 'cat','tennis','this','argument', 'food', 'golf']
 
-    print(solve_passwd(create_enc(org_dict), create_test_words(word_list)))
+    print(solve_passwd(create_enc(Original_Dictionary), create_test_words(English_Words_To_Test)))
 
-def create_enc(pass_dict):    ## creating a dicitionary of encrypted passwd
-    new_value_list = []
-    pass_list = list(pass_dict.values())
-    key_list = list(pass_dict.keys())
-    for i in pass_list:
+def create_enc(Dict_To_Enc):    ## creating a dicitionary of encrypted passwd
+    English_Word_List = []
+    English_Values_Of_Dict = list(Dict_To_Enc.values())
+    Key_List_To_Dict_To_Enc = list(Dict_To_Enc.keys())
+    for i in English_Values_Of_Dict:
         new_value = crypt.crypt(i, 'HX')
-        new_value_list.append(new_value)
+        English_Word_List.append(new_value)
 
-    final_org_dict = {key_list[i] : new_value_list[i] for i in range(len(key_list))}
-    return final_org_dict
+    Enc_Original_Dict = {Key_List_To_Dict_To_Enc[i] : English_Word_List[i] for i in range(len(Key_List_To_Dict_To_Enc))}
+    return Enc_Original_Dict
 def create_test_words(test_word_list): ##encrypting the list so we can match it to the originaal list
-    value_list = []
+    Keys_Enc_Value_List = []
     for i in test_word_list:
         new_value = crypt.crypt(i, 'HX')
-        value_list.append(new_value)
-    test_words_dict = {value_list[i]: test_word_list[i] for i in range(len(value_list))}
-    return test_words_dict
+        Keys_Enc_Value_List.append(new_value)
+    Test_Words_Dict = {Keys_Enc_Value_List[i]: test_word_list[i] for i in range(len(Keys_Enc_Value_List))}
+    return Test_Words_Dict
 
-def solve_passwd(final_org_dict, test_word_dict):
-    value_list = [] ## this is where i will put the cracked the values compared to the test word values
-    final_org_list = list(final_org_dict.values()) ##this is a list of encrypted passwords
+def solve_passwd(enc_org_dict, test_word_dict):
+    Values_To_Final_Dict = [] ## this is where i will put the cracked the values compared to the test word values
+    enc_org_dict_values = list(enc_org_dict.values()) ##this is a list of encrypted passwords
     test_word_list = list(test_word_dict.keys()) ##this is a list of encrypted passwords in regards to passwords listed in words list, i will use this to plug it into test_word_dict to crack the passwords
-    ult_key_list = list(final_org_dict.keys())  ## this is when all passwd returns
-    new_org_dict = {v: k for k, v in final_org_dict.items()} ## this is reversing the dict for the values that are not in test_word_list
-    for x in final_org_list:
+    ult_key_list = list(enc_org_dict.keys())  ## this is when all passwd returns
+    new_org_dict = {v: k for k, v in enc_org_dict.items()} ## this is reversing the dict for the values that are not in test_word_list
+    for x in enc_org_dict_values:
         if x in test_word_list:
 
             value = test_word_dict[x]
-            value_list.append(value)
+            Values_To_Final_Dict.append(value)
 
 
         else:
@@ -46,7 +46,7 @@ def solve_passwd(final_org_dict, test_word_dict):
 
     ult_key_list = list(new_org_dict.values())
 
-    final_passwd_dict = {ult_key_list[i]: value_list[i] for i in range(len(ult_key_list))}
+    final_passwd_dict = {ult_key_list[i]: Values_To_Final_Dict[i] for i in range(len(ult_key_list))}
     return final_passwd_dict
 
 
