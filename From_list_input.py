@@ -1,11 +1,12 @@
 import crypt
 import copy
 
+def main():
 
-org_dict = {'sam':'egg', 'kate':'cat', "mom": 'food', "dad": "golf", 'connor': 'tennis'}
-word_list = ['egg', 'random', 'cat','tennis','this','argument', 'food', 'golf']
+    org_dict = {'sam':'egg', 'kate':'cat', "mom": 'food', "dad": "golf", 'connor': 'tennis'}
+    word_list = ['egg', 'random', 'cat','tennis','this','argument', 'food', 'golf']
 
-
+    print(solve_passwd(create_enc(org_dict), create_test_words(word_list)))
 
 def create_enc(pass_dict):    ## creating a dicitionary of encrypted passwd
     new_value_list = []
@@ -19,10 +20,10 @@ def create_enc(pass_dict):    ## creating a dicitionary of encrypted passwd
     return final_org_dict
 def create_test_words(test_word_list): ##encrypting the list so we can match it to the originaal list
     value_list = []
-    for i in word_list:
+    for i in test_word_list:
         new_value = crypt.crypt(i, 'HX')
         value_list.append(new_value)
-    test_words_dict = {value_list[i]: word_list[i] for i in range(len(value_list))}
+    test_words_dict = {value_list[i]: test_word_list[i] for i in range(len(value_list))}
     return test_words_dict
 
 def solve_passwd(final_org_dict, test_word_dict):
@@ -54,9 +55,9 @@ def solve_passwd(final_org_dict, test_word_dict):
 
 
 
-print(solve_passwd(create_enc(org_dict), create_test_words(word_list)))
-##print(create_enc(org_dict))
-#print(create_test_words(word_list))
+if __name__ == '__main__':
+    main()
+
 
 
 

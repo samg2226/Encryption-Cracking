@@ -1,9 +1,10 @@
 import crypt
 import copy
 
+def main():
 
-org_dict = {'dog': 'analytic', 'sam':'egg', 'kate':'cat', "mom": 'food', "dad": "golf", 'connor': 'tennis'}
-
+    org_dict = {'dog': 'random', 'sam':'egg', 'kate':'cat', "mom": 'food', "dad": "golf", 'connor': 'tennis'}
+    print(solve_passwd(create_enc(org_dict), create_test_words('usa.txt')))
 
 
 
@@ -59,14 +60,14 @@ def solve_passwd(final_org_dict, test_word_dict):
     return final_passwd_dict
 
 
+if __name__ == '__main__':
+    main()
 
 
 
 
 
-print(solve_passwd(create_enc(org_dict), create_test_words('usa.txt')))
-##print(create_enc(org_dict))
-#print(create_test_words('words.txt'))
+
 
 
 
